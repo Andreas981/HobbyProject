@@ -4,8 +4,9 @@ package no.andreasmikalsen.hobbyapplication;
 import android.os.Bundle;
 
 
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-
+import androidx.appcompat.widget.Toolbar;
 
 
 import android.view.Menu;
@@ -15,6 +16,8 @@ import no.andreasmikalsen.hobbyapplication.Utility.EncryptedSharedPref;
 
 
 public class MainActivity extends AppCompatActivity {
+
+    private ActionBar actionbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +29,10 @@ public class MainActivity extends AppCompatActivity {
          */
 
         EncryptedSharedPref.initESP(this);
+
+        actionbar = getSupportActionBar();
+        actionbar.hide();
+
 
 
     }

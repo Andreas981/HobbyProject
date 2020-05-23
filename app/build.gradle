@@ -38,4 +38,7 @@ dependencies {
 
     //EncryptedSharedPreferences
     implementation "androidx.security:security-crypto:1.0.0-rc01"
+
+    //Google map
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
 }
