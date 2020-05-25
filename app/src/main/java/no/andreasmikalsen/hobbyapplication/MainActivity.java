@@ -17,7 +17,7 @@ import no.andreasmikalsen.hobbyapplication.Utility.EncryptedSharedPref;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ActionBar actionbar;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,8 +30,8 @@ public class MainActivity extends AppCompatActivity {
 
         EncryptedSharedPref.initESP(this);
 
-        actionbar = getSupportActionBar();
-        actionbar.hide();
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
 
 
