@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         drawerLayout = findViewById(R.id.drawer_layout);
 
@@ -78,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_profile:
                         Toast.makeText(MainActivity.this, "Profile is pressed", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
-                        navController.navigate(R.id.action_mapFragment_to_profileFragment);
+                        navController.navigate(R.id.profileFragment);
                         return true;
                     case R.id.nav_settings:
                         Toast.makeText(MainActivity.this, "Settings is pressed", Toast.LENGTH_SHORT).show();
@@ -98,6 +99,14 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        toolbar.setNavigationIcon(R.drawable.ic_menu);
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(navView);
+            }
+        });
+
 
         /*navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
             @Override
@@ -112,6 +121,8 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });*/
+
+        EncryptedSharedPref.writeBool(EncryptedSharedPref.IS_AUTH, false);
 
     }
 
@@ -133,6 +144,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+
             return true;
         }
 

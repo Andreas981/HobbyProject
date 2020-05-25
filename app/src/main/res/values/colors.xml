@@ -7,4 +7,6 @@
     <color name="colorPrimaryText">#fff</color>
     <color name="colorPrimaryDarkText">#fff</color>
     <color name="colorPrimaryLightText">#000</color>
+
+    <color name="colorDialogBackground">#f5f5f5</color>
 </resources>

@@ -18,9 +18,12 @@ public class EncryptedSharedPref {
 
     //All keywords used for storage
     //public static final String SIDE = "side";
+    public static final String IS_AUTH = "auth";
+    public static final String PASSWORD = "password";
+    public static final String AUTH_METHOD = "authMethod";
 
 
-    public static final String[] ALLKEYWORDS = {};
+    public static final String[] ALLKEYWORDS = {IS_AUTH,PASSWORD,AUTH_METHOD};
 
 
     private static SharedPreferences encryptedSharedPreferences;
