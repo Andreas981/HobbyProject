@@ -9,6 +9,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
@@ -57,33 +58,42 @@ public class MainActivity extends AppCompatActivity {
                         .build();
 
         final NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
-        NavigationView navView = findViewById(R.id.nav_view);
+        final NavigationView navView = findViewById(R.id.nav_view);
         NavigationUI.setupWithNavController(navView, navController);
 
         navView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                int id =item.getItemId();
-                if(id == R.id.nav_map){
-                    Toast.makeText(MainActivity.this, "Map is pressed", Toast.LENGTH_SHORT).show();
-                    navController.navigate(R.id.mapFragment);
-                    return true;
-                }else if(id == R.id.nav_gallery){
-                    Toast.makeText(MainActivity.this, "Gallery is pressed", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if(id == R.id.nav_profile){
-                    Toast.makeText(MainActivity.this, "Profile is pressed", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if(id == R.id.nav_settings){
-                    Toast.makeText(MainActivity.this, "Settings is pressed", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if(id == R.id.nav_share){
-                    Toast.makeText(MainActivity.this, "Share is pressed", Toast.LENGTH_SHORT).show();
-                    return true;
-                }else if(id == R.id.nav_send){
-                    Toast.makeText(MainActivity.this, "Send is pressed", Toast.LENGTH_SHORT).show();
-                    return true;
+                int id = item.getItemId();
+                switch (id){
+                    case R.id.nav_map:
+                        Toast.makeText(MainActivity.this, "Map is pressed", Toast.LENGTH_SHORT).show();
+                        navController.navigate(R.id.mapFragment);
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_gallery:
+                        Toast.makeText(MainActivity.this, "Gallery is pressed", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_profile:
+                        Toast.makeText(MainActivity.this, "Profile is pressed", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        navController.navigate(R.id.action_mapFragment_to_profileFragment);
+                        return true;
+                    case R.id.nav_settings:
+                        Toast.makeText(MainActivity.this, "Settings is pressed", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_share:
+                        Toast.makeText(MainActivity.this, "Share is pressed", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
+                    case R.id.nav_send:
+                        Toast.makeText(MainActivity.this, "Send is pressed", Toast.LENGTH_SHORT).show();
+                        drawerLayout.closeDrawer(GravityCompat.START);
+                        return true;
                 }
+
                 return false;
             }
         });
@@ -129,12 +139,6 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-
-
-        return NavigationUI.navigateUp(navController, drawerLayout) || super.onSupportNavigateUp();
-    }
 
     @Override
     public void onBackPressed(){
