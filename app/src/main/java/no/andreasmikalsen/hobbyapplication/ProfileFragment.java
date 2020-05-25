@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.biometric.BiometricPrompt;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
@@ -39,6 +40,7 @@ public class ProfileFragment extends Fragment {
     private Executor exec;
     private BiometricPrompt bioPrompt;
     private BiometricPrompt.PromptInfo promptInfo;
+    private ActionBar actionBar;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -56,6 +58,9 @@ public class ProfileFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         navController = Navigation.findNavController(view);
+
+        actionBar = ((MainActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle("Profile");
 
         exec = ContextCompat.getMainExecutor(getActivity().getApplicationContext());
         bioPrompt = new BiometricPrompt(ProfileFragment.this, exec, new BiometricPrompt.AuthenticationCallback() {
@@ -97,9 +102,6 @@ public class ProfileFragment extends Fragment {
                 navController.navigate(R.id.profileFragment);
             }
         });
-
-
-
 
     }
 
