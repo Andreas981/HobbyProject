@@ -13,4 +13,13 @@
     <string name="menu_settings">Settings</string>
     <string name="menu_share">Share</string>
     <string name="menu_send">Send</string>
+    <string name="setup_authentication">Setup authentication</string>
+    <string name="biometric">Biometric</string>
+    <string name="pin">PIN</string>
+    <string name="password">Password</string>
+    <string name="insert_pin_code">Insert pin code</string>
+    <string name="repeat_pin_code">Repeat pin code</string>
+    <string name="cancel">CANCEL</string>
+    <string name="save">SAVE</string>
+    <string name="sign_in">Sign in</string>
 </resources>
