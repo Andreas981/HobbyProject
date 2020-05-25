@@ -7,10 +7,17 @@ import android.os.Bundle;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 
 
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.google.android.material.navigation.NavigationView;
 
 import no.andreasmikalsen.hobbyapplication.Utility.EncryptedSharedPref;
 
@@ -18,6 +25,8 @@ import no.andreasmikalsen.hobbyapplication.Utility.EncryptedSharedPref;
 public class MainActivity extends AppCompatActivity {
 
     private Toolbar toolbar;
+    private NavController navController;
+    private DrawerLayout drawerLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,10 +39,23 @@ public class MainActivity extends AppCompatActivity {
 
         EncryptedSharedPref.initESP(this);
 
+        Toolbar t = new Toolbar(this);
+        t.addView(getLayoutInflater().inflate(R.layout.toolbar_layout, null));
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        drawerLayout = findViewById(R.id.drawer_layout);
 
+
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph())
+                        .setDrawerLayout(drawerLayout)
+                        .build();
+
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationView navView = findViewById(R.id.nav_view);
+        NavigationUI.setupWithNavController(navView, navController);
 
     }
 

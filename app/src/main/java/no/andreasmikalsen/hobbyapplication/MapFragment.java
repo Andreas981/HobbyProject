@@ -9,6 +9,7 @@ import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,6 +57,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
         actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Map");
+        Log.i("TOOLBAR CHECK: ", "Title from map: " + actionBar.getTitle());
 
     }
 
