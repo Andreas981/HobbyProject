@@ -113,6 +113,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
+        EncryptedSharedPref.writeBool(EncryptedSharedPref.IS_AUTH, false);
+
     }
 
 

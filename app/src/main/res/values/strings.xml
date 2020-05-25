@@ -22,4 +22,6 @@
     <string name="cancel">CANCEL</string>
     <string name="save">SAVE</string>
     <string name="sign_in">Sign in</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="insert_password">Insert password</string>
 </resources>

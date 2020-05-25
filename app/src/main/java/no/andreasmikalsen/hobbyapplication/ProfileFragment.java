@@ -73,6 +73,7 @@ public class ProfileFragment extends Fragment {
                 super.onAuthenticationSucceeded(result);
                 Toast.makeText(getActivity().getApplicationContext(),
                         "Authentication succeeded!", Toast.LENGTH_SHORT).show();
+                EncryptedSharedPref.writeBool(EncryptedSharedPref.IS_AUTH, true);
             }
 
             @Override
@@ -84,7 +85,7 @@ public class ProfileFragment extends Fragment {
             }
         });
 
-        
+
 
 
         Button b = view.findViewById(R.id.deleteAuth);
@@ -303,13 +304,14 @@ public class ProfileFragment extends Fragment {
                             String inputCode = inputPassword.getText().toString();
 
                             if (inputCode == password) {
-                                Toast.makeText(getContext().getApplicationContext(), "Correct pin", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext().getApplicationContext(), "Correct password", Toast.LENGTH_SHORT).show();
                                 alertDialog1.dismiss();
+                                EncryptedSharedPref.writeBool(EncryptedSharedPref.IS_AUTH, true);
                             } else {
-                                Toast.makeText(getContext().getApplicationContext(), "Wrong pin", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(getContext().getApplicationContext(), "Wrong password", Toast.LENGTH_SHORT).show();
                             }
                         } else {
-                            Toast.makeText(getContext().getApplicationContext(), "Wrong pin", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext().getApplicationContext(), "Wrong password", Toast.LENGTH_SHORT).show();
                         }
                     }catch (NumberFormatException e){
                         Toast.makeText(getContext().getApplicationContext(), "Something went wrong, try again", Toast.LENGTH_SHORT).show();
