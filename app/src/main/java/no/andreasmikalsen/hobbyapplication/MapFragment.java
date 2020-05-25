@@ -5,6 +5,7 @@ import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
 
@@ -33,6 +34,7 @@ import static no.andreasmikalsen.hobbyapplication.Utility.Constants.MAPVIEW_BUND
 public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mMapView;
+    private ActionBar actionBar;
 
     public MapFragment() {
         // Required empty public constructor
@@ -51,6 +53,10 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         super.onViewCreated(view, savedInstanceState);
         mMapView = view.findViewById(R.id.map);
         initGoogleMap(savedInstanceState);
+
+        actionBar = ((MainActivity) getActivity()).getSupportActionBar();
+        actionBar.setTitle("Map");
+
     }
 
     private void initGoogleMap(Bundle savedInstanceState){
