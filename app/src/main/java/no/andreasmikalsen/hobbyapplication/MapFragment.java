@@ -22,6 +22,7 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import java.util.ArrayList;
@@ -58,6 +59,15 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Map");
         Log.i("TOOLBAR CHECK: ", "Title from map: " + actionBar.getTitle());
+
+        FloatingActionButton fab = view.findViewById(R.id.fab_map_list);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Going to list view of workshops", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
     }
 

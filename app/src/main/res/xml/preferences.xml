@@ -1,4 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+<PreferenceScreen xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="rootKey">
+
+    <PreferenceCategory
+        app:key="security_category"
+        app:title="Security">
+        <Preference
+            app:key="authentication"
+            app:title="Change authentication"/>
+
+    </PreferenceCategory>
+
+
+    <PreferenceCategory
+        app:key="application_category"
+        app:title="Application">
+        <SwitchPreferenceCompat
+            app:key="notifications"
+            app:title="Enable message notifications"/>
+
+        <Preference
+            app:key="feedback"
+            app:title="Send feedback"
+            app:summary="Report technical issues or suggest new features"/>
+    </PreferenceCategory>
 
 </PreferenceScreen>
