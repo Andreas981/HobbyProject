@@ -21,9 +21,10 @@ public class EncryptedSharedPref {
     public static final String IS_AUTH = "auth";
     public static final String PASSWORD = "password";
     public static final String AUTH_METHOD = "authMethod";
+    public static final String USER_NAME = "userName";
 
 
-    public static final String[] ALLKEYWORDS = {IS_AUTH,PASSWORD,AUTH_METHOD};
+    public static final String[] ALLKEYWORDS = {IS_AUTH,PASSWORD,AUTH_METHOD,USER_NAME};
 
 
     private static SharedPreferences encryptedSharedPreferences;

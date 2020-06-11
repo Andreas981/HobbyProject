@@ -1,6 +1,7 @@
 package no.andreasmikalsen.hobbyapplication;
 
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.os.Bundle;
@@ -16,12 +17,14 @@ import androidx.navigation.Navigation;
 
 import android.util.Pair;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioGroup;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.concurrent.Executor;
@@ -42,6 +45,9 @@ public class ProfileFragment extends Fragment {
     private BiometricPrompt.PromptInfo promptInfo;
     private ActionBar actionBar;
 
+    private TextView nameTextView;
+    private EditText editNameView;
+
     public ProfileFragment() {
         // Required empty public constructor
     }
@@ -54,6 +60,7 @@ public class ProfileFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_profile, container, false);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -90,19 +97,78 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        //Name text view
+        nameTextView = view.findViewById(R.id.profile_name);
+        editNameView = view.findViewById(R.id.profile_name_edit);
 
+        String name = EncryptedSharedPref.readString(EncryptedSharedPref.USER_NAME, "PLACEHOLDER");
+        nameTextView.setText(name);
+        editNameView.setText(name);
 
-
-        Button b = view.findViewById(R.id.deleteAuth);
-        b.setOnClickListener(new View.OnClickListener() {
+        //Textview click listener, checking if the drawable is clicked
+        nameTextView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public void onClick(View v) {
-                EncryptedSharedPref.delete(EncryptedSharedPref.AUTH_METHOD);
-                EncryptedSharedPref.delete(EncryptedSharedPref.PASSWORD);
-                navController.navigate(R.id.profileFragment);
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+                System.out.println("CLICKLISTENER: text view clicked");
+
+                if(event.getAction() == MotionEvent.ACTION_DOWN) {
+                    System.out.println("CLICKLISTENER: ACTION_UP");
+                    if(event.getRawX() >= (nameTextView.getRight() - nameTextView.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        System.out.println("DRAWABLE RIGHT PRESSED");
+
+                        nameTextView.setVisibility(View.GONE);
+                        editNameView.setVisibility(View.VISIBLE);
+
+                        return true;
+                    }
+                }
+                return false;
             }
         });
 
+        //Name edittext click listener
+        editNameView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int DRAWABLE_LEFT = 0;
+                final int DRAWABLE_TOP = 1;
+                final int DRAWABLE_RIGHT = 2;
+                final int DRAWABLE_BOTTOM = 3;
+
+
+                if(event.getAction() == MotionEvent.ACTION_UP) {
+                    if(event.getRawX() >= (editNameView.getRight() - editNameView.getCompoundDrawables()[DRAWABLE_RIGHT].getBounds().width())) {
+                        // your action here
+                        nameTextView.setText(editNameView.getText().toString());
+                        editNameView.setText(editNameView.getText().toString());
+                        EncryptedSharedPref.writeString(EncryptedSharedPref.USER_NAME, editNameView.getText().toString());
+                        nameTextView.setVisibility(View.VISIBLE);
+                        editNameView.setVisibility(View.GONE);
+                        hideKeyboard(editNameView);
+                        return true;
+                    }else if(event.getRawX() <= (editNameView.getCompoundDrawables()[DRAWABLE_LEFT].getBounds().width())){
+                        nameTextView.setVisibility(View.VISIBLE);
+                        editNameView.setVisibility(View.GONE);
+                        hideKeyboard(editNameView);
+                    }
+                }
+                return false;
+            }
+        });
+
+
+    }
+
+    private void hideKeyboard(EditText text){
+        //Hide keyboard
+        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(text.getWindowToken(), 0);
     }
 
     @Override

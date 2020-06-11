@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
@@ -70,6 +71,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_map:
                         Toast.makeText(MainActivity.this, "Map is pressed", Toast.LENGTH_SHORT).show();
                         navController.navigate(R.id.mapFragment);
+                        navController.setGraph(R.navigation.nav_graph);
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
                     case R.id.nav_gallery:
@@ -84,13 +86,10 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_settings:
                         Toast.makeText(MainActivity.this, "Settings is pressed", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
+                        navController.navigate(R.id.settingsFragment);
                         return true;
                     case R.id.nav_share:
                         Toast.makeText(MainActivity.this, "Share is pressed", Toast.LENGTH_SHORT).show();
-                        drawerLayout.closeDrawer(GravityCompat.START);
-                        return true;
-                    case R.id.nav_send:
-                        Toast.makeText(MainActivity.this, "Send is pressed", Toast.LENGTH_SHORT).show();
                         drawerLayout.closeDrawer(GravityCompat.START);
                         return true;
                 }
@@ -122,7 +121,12 @@ public class MainActivity extends AppCompatActivity {
             }
         });*/
 
-        EncryptedSharedPref.writeBool(EncryptedSharedPref.IS_AUTH, false);
+
+
+
+        //TODO: Uncomment the line under
+        //EncryptedSharedPref.writeBool(EncryptedSharedPref.IS_AUTH, false);
+
 
     }
 
@@ -144,7 +148,7 @@ public class MainActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-
+            navController.navigate(R.id.settingsFragment);
             return true;
         }
 

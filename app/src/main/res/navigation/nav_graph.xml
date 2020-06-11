@@ -17,6 +17,9 @@
             app:exitAnim="@anim/backward_animation"
             app:popEnterAnim="@anim/pop_forward"
             app:popExitAnim="@anim/pop_backward" />
+        <action
+            android:id="@+id/action_mapFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -30,5 +33,20 @@
             app:exitAnim="@anim/forward_animation"
             app:popEnterAnim="@anim/pop_backward"
             app:popExitAnim="@anim/pop_forward" />
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="no.andreasmikalsen.hobbyapplication.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_mapFragment"
+            app:destination="@id/mapFragment"
+            app:exitAnim="@anim/backward_animation"
+            app:popUpTo="@+id/nav_graph"
+            app:popUpToInclusive="true" />
     </fragment>
 </navigation>
