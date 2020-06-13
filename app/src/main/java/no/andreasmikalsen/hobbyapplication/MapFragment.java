@@ -8,6 +8,8 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.ActionBar;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -37,6 +39,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     private MapView mMapView;
     private ActionBar actionBar;
+    private NavController navController;
 
     public MapFragment() {
         // Required empty public constructor
@@ -56,6 +59,8 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         mMapView = view.findViewById(R.id.map);
         initGoogleMap(savedInstanceState);
 
+        navController = Navigation.findNavController(view);
+
         actionBar = ((MainActivity) getActivity()).getSupportActionBar();
         actionBar.setTitle("Map");
         Log.i("TOOLBAR CHECK: ", "Title from map: " + actionBar.getTitle());
@@ -66,6 +71,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
             public void onClick(View view) {
                 Snackbar.make(view, "Going to list view of workshops", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
+                navController.navigate(R.id.action_mapFragment_to_listFragment);
             }
         });
 

@@ -20,6 +20,13 @@
         <action
             android:id="@+id/action_mapFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_mapFragment_to_listFragment"
+            app:destination="@id/listFragment"
+            app:enterAnim="@anim/forward_animation"
+            app:exitAnim="@anim/backward_animation"
+            app:popEnterAnim="@anim/forward_animation"
+            app:popExitAnim="@anim/backward_animation" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -48,5 +55,18 @@
             app:exitAnim="@anim/backward_animation"
             app:popUpTo="@+id/nav_graph"
             app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/listFragment"
+        android:name="no.andreasmikalsen.hobbyapplication.ListFragment"
+        android:label="fragment_list"
+        tools:layout="@layout/fragment_list" >
+        <action
+            android:id="@+id/action_listFragment_to_mapFragment"
+            app:destination="@id/mapFragment"
+            app:enterAnim="@anim/forward_animation"
+            app:exitAnim="@anim/backward_animation"
+            app:popEnterAnim="@anim/forward_animation"
+            app:popExitAnim="@anim/backward_animation" />
     </fragment>
 </navigation>
