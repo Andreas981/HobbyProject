@@ -27,4 +27,6 @@
     <string name="placeholder">PLACEHOLDER</string>
     <string name="my_cars">My Cars</string>
     <string name="favourite">Favourite</string>
+    <string name="fitler">Fitler</string>
+    <string name="clear_filter">Clear</string>
 </resources>
