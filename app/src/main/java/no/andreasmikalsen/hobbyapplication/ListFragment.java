@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -48,8 +49,11 @@ public class ListFragment extends Fragment {
     private ArrayList<Workshop> workshops = new ArrayList<>();
     private ArrayList<Workshop> mWorkshops = new ArrayList<>();
     private EditText filterPostSted;
+    private EditText filterNavn;
+    private Button showFilter;
     private Button filterBtn;
     private Button clearFilterBtn;
+    private LinearLayout filterBox;
 
     public ListFragment() {
         // Required empty public constructor
@@ -72,33 +76,50 @@ public class ListFragment extends Fragment {
         filterPostSted = view.findViewById(R.id.list_filter_poststed_edittext);
         filterBtn = view.findViewById(R.id.list_filter_btn);
         clearFilterBtn = view.findViewById(R.id.list_clear_filter_btn);
+        showFilter = view.findViewById(R.id.list_filter_icon);
+        filterBox = view.findViewById(R.id.list_filter_box);
+        filterNavn = view.findViewById(R.id.list_filter_navn_edittext);
 
         InputStream inputStream = getResources().openRawResource(R.raw.verksted);
         getWorkshopFromFile(inputStream);
         populateListView();
 
 
+        showFilter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                filterBox.setVisibility(View.VISIBLE);
+                showFilter.setVisibility(View.GONE);
+            }
+        });
+
+
+
         filterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String filterPostStedText = filterPostSted.getText().toString();
-                if(filterPostStedText.trim().length() <= 0){
+                String filterNavnText = filterNavn.getText().toString();
+                if(filterNavnText.trim().length() <= 0 && filterPostStedText.trim().length() <= 0){
                     Snackbar.make(v, "Filter tekst er tom", Snackbar.LENGTH_LONG)
                             .setAction("Action", null).show();
                 }else{
-                    ArrayList<Workshop> tempList= filterWorkshops(filterPostStedText);
+
+                    ArrayList<Workshop> tempList = filterWorkshops(filterPostStedText);
                     if(tempList.size() <= 0){
                         Snackbar.make(v, "Fant ingen verksteder med dette filteret", Snackbar.LENGTH_LONG)
                                 .setAction("Action", null).show();
                     }else{
                         mWorkshops = tempList;
                         populateListView();
-                        filterPostSted.setText("");
-                        //Hide keyboard
-                        InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.hideSoftInputFromWindow(filterPostSted.getWindowToken(), 0);
+                        filterBox.setVisibility(View.GONE);
+                        showFilter.setVisibility(View.VISIBLE);
+
                     }
                 }
+                //Hide keyboard
+                InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(filterPostSted.getWindowToken(), 0);
             }
         });
 
@@ -107,6 +128,8 @@ public class ListFragment extends Fragment {
             public void onClick(View v) {
                 mWorkshops = workshops;
                 populateListView();
+                filterBox.setVisibility(View.GONE);
+                showFilter.setVisibility(View.VISIBLE);
             }
         });
 
@@ -116,7 +139,7 @@ public class ListFragment extends Fragment {
         ArrayList<Workshop> secondList = new ArrayList<>();
 
         for( int i = 0 ; i < workshops.size(); i++) {
-            if (workshops.get(i).getPoststed().toLowerCase().equals(value)) {
+            if (workshops.get(i).getPoststed().toLowerCase().equals(value.toLowerCase())) {
                 secondList.add(workshops.get(i));
             }
         }

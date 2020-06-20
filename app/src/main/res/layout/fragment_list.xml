@@ -6,9 +6,20 @@
     android:orientation="vertical"
     tools:context=".ListFragment">
 
+    <Button
+        android:id="@+id/list_filter_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/filter"
+        android:textSize="15sp"
+        android:drawableStart="@drawable/ic_filter_black"
+        android:outlineProvider="none"/>
+
     <LinearLayout
+        android:id="@+id/list_filter_box"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:visibility="visible"
         android:orientation="vertical">
         <LinearLayout
             android:layout_width="match_parent"
@@ -19,6 +30,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:hint="Poststed"
+            android:layout_marginEnd="20dp"
+            android:textSize="25sp"/>
+        <EditText
+            android:id="@+id/list_filter_navn_edittext"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:hint="Navn"
             android:textSize="25sp"/>
 
         </LinearLayout>
